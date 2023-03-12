@@ -1,0 +1,41 @@
+﻿@model DACN2.Models.DiaDiem
+
+@{
+    ViewBag.Title = "DeleteDiaDiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn đã chắc chắn xóa ?</h3>
+<div>
+    <h4>DiaDiem</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenDiaDiem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenDiaDiem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChiPhiDD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChiPhiDD)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

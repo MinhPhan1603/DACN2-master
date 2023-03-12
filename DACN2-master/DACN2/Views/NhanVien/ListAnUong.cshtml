@@ -1,0 +1,53 @@
+﻿@model IEnumerable<DACN2.Models.AnUong>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListAnUong</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Tạo mới thông tin ăn uống", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenBuaAn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChiPhi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaDiemAnUong)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenBuaAn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ChiPhi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DiaDiemAnUong)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "EditAnUong", new { id=item.MaAnUong }) |
+              
+                @Html.ActionLink("Xóa", "DeleteAnUong", new { id=item.MaAnUong })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

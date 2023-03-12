@@ -1,0 +1,33 @@
+﻿@model DACN2.Models.ChucVu
+
+@{
+    ViewBag.Title = "DeleteNhanVien";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa thông tin nhân viên</h2>
+
+<h3>Bạn có chắc chắn xóa thông tin này?</h3>
+<div>
+    <h4>ChucVu</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenCV)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenCV)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

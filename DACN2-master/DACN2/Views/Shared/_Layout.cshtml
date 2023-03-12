@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/Content/Style.css" media="all" />
+    <link href="~/Content/fontawesome-free-6.2.0-web/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("AKKAtravel.com", "Index", "Tour", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Trang chủ", "Index", "Tour")</li>
+                    <li>@Html.ActionLink("Tin Tức", "TinTuc", "Tour")</li>
+                    <li>@Html.ActionLink( "Giỏ Hàng", "GioHang", "GioHang")</li>
+                    <li>@Html.Action( "LoaiSanPham", "Tour")</li>
+                    <li>
+                        @using (Html.BeginForm("Index", "Tour", FormMethod.Get, new { @class = "form-inline" }))
+                        {
+                            <div class="form-group form-inline" style="display: flex; align-items: center; justify-content: center; margin:10px; ">
+                                <input type="Text" class="form-control col-md-10" value="@ViewBag.Keyword" name="searchString" placeholder="Nhập tên cần tìm">
+                                <input type="submit" class="btn  btn-primary" value="Tìm Tour" style="margin-left:10px;">
+                            </div>
+
+                        }
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @if (Session["TaiKhoan"] != null)
+                    {
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-user"></i> </a></li>
+                        
+                        <li><a href="#" style="margin-right:-25px;"><i class="fa-solid fa-right-from-bracket"></i> </a></li>
+                        <li>@Html.ActionLink("Đăng Xuất", "DangXuat", "KhachHang")</li>
+
+                    }
+                    else
+                    {
+                        
+                        <li>@Html.ActionLink("Đăng Ký", "Dangky", "KhachHang")</li>
+                        
+                        <li>@Html.ActionLink("Đăng Nhập", "DangNhap", "KhachHang")</li>
+                    }
+                    @*<li>@Html.ActionLink("Dang Ky", "DangKy", "NguoiDung")</li>
+            <li>@Html.ActionLink("Dang Nhap", "DangNhap", "NguoiDung")</li>*@
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - AKKA TRAVEL.COM</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @RenderSection("upload", required: false)
+</body>
+</html>

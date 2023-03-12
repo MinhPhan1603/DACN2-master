@@ -1,0 +1,49 @@
+﻿@model DACN2.Models.AnUong
+
+@{
+    ViewBag.Title = "DeleteAnUong";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Xóa</h2>
+
+<h3>Bạn đã chắc chắn xóa ?</h3>
+<div>
+    <h4>AnUong</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenBuaAn)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenBuaAn)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ChiPhi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ChiPhi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaDiemAnUong)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DiaDiemAnUong)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DACN2.Models.NhanVien>
+
+@{
+    ViewBag.Title = "ListNhanVien";
+    Layout = "~/Views/Admin/View.cshtml";
+}
+
+<h2>ListNhanVien</h2>
+
+<p>
+    @Html.ActionLink("Tạo mới tài khoản nhân viên", "CreateNhanVien")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatKhau)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SDT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GioiTinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaCV)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenNV)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MatKhau)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SDT)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GioiTinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaCV)
+        </td>
+        <td>
+            @Html.ActionLink("Chỉnh sửa thông tin nhân viên", "EditNhanVien", new { id=item.MaNV }) |
+ 
+            @Html.ActionLink("Xóa", "DeleteNhanVien", new { id=item.MaNV })
+        </td>
+    </tr>
+}
+
+</table>

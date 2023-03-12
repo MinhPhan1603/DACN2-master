@@ -1,0 +1,45 @@
+﻿@model IEnumerable<DACN2.Models.Chang>
+
+@{
+    
+    Layout = "~/Views/Admin/View.cshtml";
+}
+<h2>Danh sách chặng</h2>
+<p>
+    @Html.ActionLink("Tạo thông tin chặng mới", "CreateChang")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenChang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NoiDungChang)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaChang)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenChang)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.NoiDungChang)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GiaChang)
+            </td>
+            <td style="display:flex">
+                @Html.ActionLink("Chỉnh sửa", "EditChang", new { id = item.MaChang}) |
+              
+                @Html.ActionLink("Xóa", "DeleteChang", new { id = item.MaChang })
+            </td>
+        </tr>
+    }
+
+</table>

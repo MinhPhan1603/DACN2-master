@@ -1,0 +1,107 @@
+﻿@model IEnumerable<DACN2.Models.Tour>
+
+@{
+    Layout = "~/Views/Admin/View.cshtml";
+}
+<h2>Danh sách các Tour</h2>
+<p>
+    @Html.ActionLink("Tạo Tour mới", "Create", "Tour")
+</p>
+<table class="table" >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenTour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKhoiHanh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NgayKetThuc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoCho)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiTour.TenLoaiTour)
+        </th>
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.GiaNguoiLon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaTreEm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThoiGian)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.NhanVien.TenNV)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TongChang)
+        </th>
+        <th>
+        @Html.DisplayNameFor(model => model.LoiNhuan)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.TenTour)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Gia)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NgayKetThuc)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SoCho)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.LoaiTour.TenLoaiTour)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.GiaNguoiLon)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.GiaTreEm)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ThoiGian)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.NhanVien.TenNV)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TongChang)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LoiNhuan)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Thông tin người đi tour", "ListNguoiDiTour", new { id = item.ID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+    </td>
+</tr>
+    }
+
+</table>
+<h6 style="font-size:20px; margin-top: 100px;"> Tổng doanh thu : @String.Format("{0:0,0}", @ViewBag.tongtien)  <sup>đ</sup> </h6>
