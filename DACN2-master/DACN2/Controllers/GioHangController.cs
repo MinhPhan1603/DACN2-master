@@ -80,7 +80,7 @@ namespace DACN2.Controllers
 
         [HttpGet]
 
-        public ActionResult DangKy(int id, string number)
+       /* public ActionResult DangKy(int id, string number)
         {
             //for (int i = TongSoLuong(); i >= 0; i--)
             //{
@@ -116,8 +116,8 @@ namespace DACN2.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        [HttpPost]
-        public ActionResult DangKy(FormCollection collection, NguoiDiTour khs)
+        [HttpPost]*/
+    /*    public ActionResult DangKy(FormCollection collection, NguoiDiTour khs)
         {
 
             for (int i = TongSoLuong(); i >= 0;)
@@ -165,7 +165,7 @@ namespace DACN2.Controllers
 
             return RedirectToAction("Index");
         }
-
+*/
         public ActionResult Giohang()
         {
             ViewBag.Tongsoluongsanpham = TongSoLuongSanPham();
@@ -249,7 +249,7 @@ namespace DACN2.Controllers
 
         }
 
-        public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
+       /* public ActionResult DatHang(System.Web.Mvc.FormCollection collection)
         {
             DatTour dt = new DatTour();
             KhachHang kh = (KhachHang)Session["Taikhoan"];
@@ -285,7 +285,7 @@ namespace DACN2.Controllers
             return RedirectToAction("Index", "Giohang");
 
 
-        }
+        }*/
 
         /*public ActionResult NguoiDung()
         {

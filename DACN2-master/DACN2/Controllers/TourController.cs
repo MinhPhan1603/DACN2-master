@@ -35,12 +35,12 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
-        public ActionResult ListLichTrinh(int id)
-        {
+   /*          public ActionResult ListLichTrinh(int id)
+   {
             var sptl = from ss in data.LichTrinhs where ss.MaChang == id select ss;
             return PartialView(sptl);
 
-        }
+        }*/
         public ActionResult Create()
         {
             Tour Tour = new Tour();
@@ -97,8 +97,8 @@ namespace DACN2.Controllers
             {
                 s.TenTour = E_TenTour.ToString();
                 s.Gia = E_Gia;
-                s.NgayKhoiHanh = E_NgayKhoiHanh;
-                s.NgayKetThuc = E_NgayKetThuc;
+              /*  s.NgayKhoiHanh = E_NgayKhoiHanh;
+                s.NgayKetThuc = E_NgayKetThuc;*/
                 s.SoCho = E_SoCho;
                 s.NoiDung = E_NoiDung.ToString();
                 
@@ -182,8 +182,8 @@ namespace DACN2.Controllers
             {
                 D_tour.TenTour = E_TenTour.ToString();
                 D_tour.Gia = E_Gia;
-                D_tour.NgayKhoiHanh = E_NgayKhoiHanh;
-                D_tour.NgayKetThuc = E_NgayKetThuc;
+               /* D_tour.NgayKhoiHanh = E_NgayKhoiHanh;
+                D_tour.NgayKetThuc = E_NgayKetThuc;*/
                 D_tour.SoCho = E_SoCho;
                 D_tour.NoiDung = E_NoiDung.ToString();
 
@@ -262,15 +262,15 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
-/*        public ActionResult DonHang()
+        public ActionResult DonHang()
         {
 
-            var dh = from ss in data.ChiTietDatTours select ss;
-            var tt = data.ChiTietDatTours.Sum(n => Convert.ToInt32(n.Gia));
-            ViewBag.tongtien = tt;
+            var dh = from ss in data.HopDongs select ss;
+            /*var tt = data.ChiTietDatTours.Sum(n => Convert.ToInt32(n.Gia));
+            ViewBag.tongtien = tt;*/
             return View(dh);
 
-        }*/
+        }
         
 
     }

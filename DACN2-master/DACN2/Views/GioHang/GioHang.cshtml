@@ -65,30 +65,30 @@
 <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
                     <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
 
-                                        <td>
+          <td>
 
 
                                             @*<input type="number"  pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />*@
-                                            <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max"
+                                            <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max=""
                                                    name="txtSolg1" value="@item.iSoChoCon" style="width:40px; border:none" disabled />
-                                            @{ @*tính số chỗ của trẻ em*@ item.maxte = (item.max - item.iSoluongNguoiLon); }
+                                            
 
 
 
 
                                         </td>
 
-                                                            <td>
-                                                                @*<input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />*@
-                                                                <input type="number" id="n@(item.ID)" onchange="ndt('@(item.ID)')" pattern=" 0+\.[0-9]*[1-9][0-9]*$"
-                                                                       min="0" max="@item.maxte" name="txtSolg2" value="0" style="width:40px; border:none" />
+         <td>
+    @*<input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />*@
+          <input type="number" id="n@(item.ID)" onchange="ndt('@(item.ID)')" pattern=" 0+\.[0-9]*[1-9][0-9]*$"
+           min="1" max="@item.maxte" name="txtSolg2" value="0" style="width:40px; border:none" />
 
-                                                            </td>
-                                                                                <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
-                                                                                                    <td>
+           </td>
+           <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
+           <td>
                                                                                                         <a href="@Url.Action("Detail", "Giay", new { id = item.ID })">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
                                                                                                     </td>
-                                                                                                                        <td>
+           <td>
                                                                                                                             <input type="hidden" id="h@(item.ID)" value="/GioHang/DangKy/@(item.ID)?number=" />
                                                                                                                             <a href="#" id="a@(item.ID)">Nhap Nguoi Di</a>
                                                                                                                             <input type="hidden" id="c@(item.ID)" value="0" />
