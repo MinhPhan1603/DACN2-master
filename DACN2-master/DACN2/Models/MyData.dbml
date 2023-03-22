@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="QLDL1" Class="MyDataDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=MINHPHAN\SQLEXPRESS;Initial Catalog=QLDL1;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLDLConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-C560BEH;Initial Catalog=QLDL1;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="QLDL1ConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.Chang" Member="Changs">
     <Type Name="Chang">
       <Column Name="MaChang" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -59,8 +59,11 @@
       <Column Name="NgayKetThuc" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="MaTour" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="TongTien" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="TrangThai" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="MaNV" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="Tour_HopDong" Member="Tour" ThisKey="MaTour" OtherKey="ID" Type="Tour" IsForeignKey="true" />
       <Association Name="KhachHang_HopDong" Member="KhachHang" ThisKey="MaKhachHang" OtherKey="MaKhachHang" Type="KhachHang" IsForeignKey="true" />
+      <Association Name="NhanVien_HopDong" Member="NhanVien" ThisKey="MaNV" OtherKey="MaNV" Type="NhanVien" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.KhachHang" Member="KhachHangs">
@@ -96,6 +99,7 @@
       <Column Name="GioiTinh" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="MaCV" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="NhanVien_Tour" Member="Tours" ThisKey="MaNV" OtherKey="MaNV" Type="Tour" />
+      <Association Name="NhanVien_HopDong" Member="HopDongs" ThisKey="MaNV" OtherKey="MaNV" Type="HopDong" />
       <Association Name="NhanVien_TinTuc" Member="TinTucs" ThisKey="MaNV" OtherKey="MaNV" Type="TinTuc" />
       <Association Name="ChucVu_NhanVien" Member="ChucVu" ThisKey="MaCV" OtherKey="MaCV" Type="ChucVu" IsForeignKey="true" />
     </Type>

@@ -60,7 +60,7 @@ namespace DACN2.Models
     #endregion
 		
 		public MyDataDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["QLDLConnectionString1"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["QLDL1ConnectionString"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -1229,9 +1229,15 @@ namespace DACN2.Models
 		
 		private System.Nullable<decimal> _TongTien;
 		
+		private System.Nullable<bool> _TrangThai;
+		
+		private System.Nullable<int> _MaNV;
+		
 		private EntityRef<Tour> _Tour;
 		
 		private EntityRef<KhachHang> _KhachHang;
+		
+		private EntityRef<NhanVien> _NhanVien;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1253,12 +1259,17 @@ namespace DACN2.Models
     partial void OnMaTourChanged();
     partial void OnTongTienChanging(System.Nullable<decimal> value);
     partial void OnTongTienChanged();
+    partial void OnTrangThaiChanging(System.Nullable<bool> value);
+    partial void OnTrangThaiChanged();
+    partial void OnMaNVChanging(System.Nullable<int> value);
+    partial void OnMaNVChanged();
     #endregion
 		
 		public HopDong()
 		{
 			this._Tour = default(EntityRef<Tour>);
 			this._KhachHang = default(EntityRef<KhachHang>);
+			this._NhanVien = default(EntityRef<NhanVien>);
 			OnCreated();
 		}
 		
@@ -1430,6 +1441,50 @@ namespace DACN2.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThai", DbType="Bit")]
+		public System.Nullable<bool> TrangThai
+		{
+			get
+			{
+				return this._TrangThai;
+			}
+			set
+			{
+				if ((this._TrangThai != value))
+				{
+					this.OnTrangThaiChanging(value);
+					this.SendPropertyChanging();
+					this._TrangThai = value;
+					this.SendPropertyChanged("TrangThai");
+					this.OnTrangThaiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaNV", DbType="Int")]
+		public System.Nullable<int> MaNV
+		{
+			get
+			{
+				return this._MaNV;
+			}
+			set
+			{
+				if ((this._MaNV != value))
+				{
+					if (this._NhanVien.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMaNVChanging(value);
+					this.SendPropertyChanging();
+					this._MaNV = value;
+					this.SendPropertyChanged("MaNV");
+					this.OnMaNVChanged();
+				}
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Tour_HopDong", Storage="_Tour", ThisKey="MaTour", OtherKey="ID", IsForeignKey=true)]
 		public Tour Tour
 		{
@@ -1494,6 +1549,40 @@ namespace DACN2.Models
 						this._MaKhachHang = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("KhachHang");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhanVien_HopDong", Storage="_NhanVien", ThisKey="MaNV", OtherKey="MaNV", IsForeignKey=true)]
+		public NhanVien NhanVien
+		{
+			get
+			{
+				return this._NhanVien.Entity;
+			}
+			set
+			{
+				NhanVien previousValue = this._NhanVien.Entity;
+				if (((previousValue != value) 
+							|| (this._NhanVien.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._NhanVien.Entity = null;
+						previousValue.HopDongs.Remove(this);
+					}
+					this._NhanVien.Entity = value;
+					if ((value != null))
+					{
+						value.HopDongs.Add(this);
+						this._MaNV = value.MaNV;
+					}
+					else
+					{
+						this._MaNV = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("NhanVien");
 				}
 			}
 		}
@@ -1989,6 +2078,8 @@ namespace DACN2.Models
 		
 		private EntitySet<Tour> _Tours;
 		
+		private EntitySet<HopDong> _HopDongs;
+		
 		private EntitySet<TinTuc> _TinTucs;
 		
 		private EntityRef<ChucVu> _ChucVu;
@@ -2016,6 +2107,7 @@ namespace DACN2.Models
 		public NhanVien()
 		{
 			this._Tours = new EntitySet<Tour>(new Action<Tour>(this.attach_Tours), new Action<Tour>(this.detach_Tours));
+			this._HopDongs = new EntitySet<HopDong>(new Action<HopDong>(this.attach_HopDongs), new Action<HopDong>(this.detach_HopDongs));
 			this._TinTucs = new EntitySet<TinTuc>(new Action<TinTuc>(this.attach_TinTucs), new Action<TinTuc>(this.detach_TinTucs));
 			this._ChucVu = default(EntityRef<ChucVu>);
 			OnCreated();
@@ -2178,6 +2270,19 @@ namespace DACN2.Models
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhanVien_HopDong", Storage="_HopDongs", ThisKey="MaNV", OtherKey="MaNV")]
+		public EntitySet<HopDong> HopDongs
+		{
+			get
+			{
+				return this._HopDongs;
+			}
+			set
+			{
+				this._HopDongs.Assign(value);
+			}
+		}
+		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="NhanVien_TinTuc", Storage="_TinTucs", ThisKey="MaNV", OtherKey="MaNV")]
 		public EntitySet<TinTuc> TinTucs
 		{
@@ -2252,6 +2357,18 @@ namespace DACN2.Models
 		}
 		
 		private void detach_Tours(Tour entity)
+		{
+			this.SendPropertyChanging();
+			entity.NhanVien = null;
+		}
+		
+		private void attach_HopDongs(HopDong entity)
+		{
+			this.SendPropertyChanging();
+			entity.NhanVien = this;
+		}
+		
+		private void detach_HopDongs(HopDong entity)
 		{
 			this.SendPropertyChanging();
 			entity.NhanVien = null;
