@@ -196,7 +196,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="" style="width:100%;">
-                         @Html.Action("ListChang", "Tour", new { id = Model.ID})  
+                         @Html.Action("ListChang", "Tour", new { id = Model.MaTour})  
 
                         </div>
                     </div>   
@@ -410,7 +410,7 @@
 
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MaTour }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
 

@@ -211,7 +211,7 @@ namespace DACN2.Controllers
         }
         public ActionResult CapNhatGiohang(int id, System.Web.Mvc.FormCollection collection)
         {
-            var E_Tour = data.Tours.First(m => m.ID == id);
+            var E_Tour = data.Tours.First(m => m.MaTour == id);
             ViewBag.Max = Convert.ToInt32(E_Tour.SoCho);
             List<GioHang> lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.SingleOrDefault(n => n.ID == id);
