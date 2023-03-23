@@ -28,7 +28,7 @@ namespace DACN2.Controllers
             var hoten = collection["Ten"];
             var tendangnhap = collection["TenDangNhap"];
             var matkhau = collection["MatKhau"];
-            var MatkhauXacNhan = collection["MatKhauXacNhan"];
+            
             var email = collection["Email"];
             var diachi = collection["DiaChi"];
             var dienthoai = collection["STD"];
@@ -57,7 +57,7 @@ namespace DACN2.Controllers
             else
             {
             }*/
-                if (!matkhau.Equals(MatkhauXacNhan))
+                if (matkhau == "")
                 {
                     ViewData["MatkhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
                 }
