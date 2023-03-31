@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using DACN2.Context;
 using DACN2.Models;
 
 
@@ -12,7 +14,8 @@ namespace DACN2.Controllers
     public class GioHangController : Controller
     {
         // GET: GioHang
-        MyDataDataContext data = new MyDataDataContext();
+        ORACLEModels data = new ORACLEModels();
+        // MyDataDataContext data = new MyDataDataContext();
 
         [ChildActionOnly]
         public ActionResult DangKy()
@@ -21,7 +24,7 @@ namespace DACN2.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DangKy(FormCollection collection, KhachHang kh)
+        public ActionResult DangKy(FormCollection collection, KHACHHANG kh)
         {
 
             var hoten = collection["Ten"];
@@ -63,17 +66,17 @@ namespace DACN2.Controllers
             else
             {
 
-                kh.Ten = hoten;
-                kh.TenDangNhap = tendangnhap;
-                kh.MatKhau = matkhau;
-                kh.Email = email;
-                kh.DiaChi = diachi;
+                kh.TEN = hoten;
+                kh.TENDANGNHAP = tendangnhap;
+                kh.MATKHAU = matkhau;
+                kh.EMAIL = email;
+                kh.DIACHI = diachi;
                 kh.CMND = Convert.ToInt32(CMND);
                 kh.SDT = Convert.ToInt32(dienthoai);
 
 
-                data.KhachHangs.InsertOnSubmit(kh);
-                data.SubmitChanges();
+                data.KHACHHANGs.AddOrUpdate(kh);
+                data.SaveChanges();
                 return this.DangKy();
             }
             return this.DangKy();
@@ -279,8 +282,8 @@ namespace DACN2.Controllers
         }
         public ActionResult CapNhatGiohang(int id, System.Web.Mvc.FormCollection collection)
         {
-            var E_Tour = data.Tours.First(m => m.MaTour == id);
-            ViewBag.Max = Convert.ToInt32(E_Tour.SoCho);
+            var E_Tour = data.TOURs.First(m => m.MATOUR == id);
+            ViewBag.Max = Convert.ToInt32(E_Tour.SOCHO);
             List<GioHang> lstGiohang = Laygiohang();
             GioHang sanpham = lstGiohang.SingleOrDefault(n => n.ID == id);
             if (sanpham != null)

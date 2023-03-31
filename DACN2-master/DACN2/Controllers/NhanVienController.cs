@@ -1,6 +1,8 @@
-﻿using DACN2.Models;
+﻿using DACN2.Context;
+using DACN2.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,7 +11,8 @@ namespace DACN2.Controllers
 {
     public class NhanVienController : Controller
     {
-        MyDataDataContext data = new MyDataDataContext();
+        ORACLEModels data = new ORACLEModels();
+        // MyDataDataContext data = new MyDataDataContext();
         // GET: NhanVien
         public ActionResult Index()
         {
@@ -120,7 +123,7 @@ namespace DACN2.Controllers
         {
 
 
-            var D_tour = data.Tours.FirstOrDefault(m => m.MaTour == id);
+            var D_tour = data.TOURs.FirstOrDefault(m => m.MATOUR == id);
 
             /*D_tour.LoaiTours = data.LoaiTours.ToList();
             D_tour.LoaiKsan = data.KSans.ToList();
@@ -135,7 +138,7 @@ namespace DACN2.Controllers
         {
 
             /*s.LoaiTours = data.LoaiTours.ToList();*/
-            var D_tour = data.Tours.First(m => m.MaTour == id);
+            var D_tour = data.TOURs.First(m => m.MATOUR == id);
             /*            D_tour.LoaiTours = data.LoaiTours.ToList();
                         D_tour.LoaiKsan = data.KSans.ToList();
                         D_tour.HuongDanViens = data.HuongDanViens.ToList();
@@ -165,7 +168,7 @@ namespace DACN2.Controllers
             var E_Hinh2 = collection["Hinh2"];
             var E_Hinh3 = collection["Hinh3"];
             /*            var E_Hinh4 = collection["Hinh4"];*/
-            D_tour.MaTour = id;
+            D_tour.MATOUR = id;
 
             if (string.IsNullOrEmpty(E_TenTour))
             {
@@ -173,34 +176,34 @@ namespace DACN2.Controllers
             }
             else
             {
-                D_tour.TenTour = E_TenTour.ToString();
-                D_tour.Gia = E_Gia;
+                D_tour.TENTOUR = E_TenTour.ToString();
+                D_tour.GIA = E_Gia;
                /* D_tour.NgayKhoiHanh = E_NgayKhoiHanh;
                 D_tour.NgayKetThuc = E_NgayKetThuc;*/
-                D_tour.SoCho = E_SoCho;
-                D_tour.NoiDung = E_NoiDung.ToString();
+                D_tour.SOCHO = E_SoCho;
+                D_tour.NOIDUNG = E_NoiDung.ToString();
 
-                D_tour.MaLoaiTour = E_MaLoaiTour;
+                D_tour.MALOAITOUR = E_MaLoaiTour;
 
-                D_tour.Hinh = E_Hinh.ToString();
+                D_tour.HINH = E_Hinh.ToString();
                 /*               D_tour.MaKS = E_MaKS;
                                 D_tour.MaDiaDiem = E_MaDiaDiem;
                                 D_tour.MaMayBay = E_MaMayBay;*/
-                D_tour.MaNV = E_IDHDV;
+                D_tour.MANV = E_IDHDV;
                 /*--------*/
-                D_tour.NoiKhoiHanh = E_NoiKhoiHanh.ToString();
+                D_tour.NOIKHOIHANH = E_NoiKhoiHanh.ToString();
                 /*D_tour.MaLichTrinh = E_MaLichTrinh;*/
-                D_tour.GiaNguoiLon = E_GiaNguoiLon;
-                D_tour.GiaTreEm = E_GiaTreEm;
-                D_tour.ThoiGian = E_ThoiGian.ToString();
-                D_tour.Hinh2 = E_Hinh2.ToString();
-                D_tour.Hinh3 = E_Hinh3.ToString();
+                D_tour.GIANGUOILON = E_GiaNguoiLon;
+                D_tour.GIATREEM = E_GiaTreEm;
+                D_tour.THOIGIAN = E_ThoiGian.ToString();
+                D_tour.HINH2 = E_Hinh2.ToString();
+                D_tour.HINH3 = E_Hinh3.ToString();
                 /*D_tour.Hinh4 = E_Hinh4.ToString();*/
 
                 UpdateModel(D_tour);
 
 
-                data.SubmitChanges();
+                data.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -208,15 +211,15 @@ namespace DACN2.Controllers
         }
         public ActionResult Delete(int id)
         {
-            var D_tour = data.Tours.First(m => m.MaTour == id);
+            var D_tour = data.TOURs.First(m => m.MATOUR == id);
             return View(D_tour);
         }
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            var D_giay = data.Tours.Where(m => m.MaTour == id).First();
-            data.Tours.DeleteOnSubmit(D_giay);
-            data.SubmitChanges();
+            var D_giay = data.TOURs.Where(m => m.MATOUR == id).First();
+            data.TOURs.Remove(D_giay);
+            data.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -685,7 +688,7 @@ namespace DACN2.Controllers
         /*------------------------------------------------------------*/
         public ActionResult ListKhachHang()
         {
-            var sptl = from ss in data.KhachHangs select ss;
+            var sptl = from ss in data.KHACHHANGs select ss;
             return PartialView(sptl);
 
         }
@@ -698,7 +701,7 @@ namespace DACN2.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateKhachHang(FormCollection collection, KhachHang s)
+        public ActionResult CreateKhachHang(FormCollection collection, KHACHHANG s)
         {
 
             
@@ -715,15 +718,15 @@ namespace DACN2.Controllers
             }
             else
             {
-                s.Ten = E_Ten.ToString();
+                s.TEN = E_Ten.ToString();
                 s.SDT = E_SDT;
-                s.Email = E_Email.ToString();
-                s.MatKhau = E_MatKhau.ToString();
-                s.TenDangNhap = E_TenDangNhap.ToString();
+                s.EMAIL = E_Email.ToString();
+                s.MATKHAU = E_MatKhau.ToString();
+                s.TENDANGNHAP = E_TenDangNhap.ToString();
                 s.CMND = E_CMND;
-                s.DiaChi = E_DiaChi.ToString();
-                data.KhachHangs.InsertOnSubmit(s);
-                data.SubmitChanges();
+                s.DIACHI = E_DiaChi.ToString();
+                data.KHACHHANGs.AddOrUpdate(s);
+                data.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -734,15 +737,15 @@ namespace DACN2.Controllers
         {
 
 
-            var D_PT = data.KhachHangs.FirstOrDefault(m => m.MaKhachHang == id);
+            var D_PT = data.KHACHHANGs.FirstOrDefault(m => m.MAKHACHHANG == id);
             return View(D_PT);
         }
 
         [HttpPost]
-        public ActionResult EditKhachHang(FormCollection collection, int id, KhachHang s)
+        public ActionResult EditKhachHang(FormCollection collection, int id, KHACHHANG s)
         {
 
-            var D_PT = data.KhachHangs.First(m => m.MaKhachHang == id);
+            var D_PT = data.KHACHHANGs.First(m => m.MAKHACHHANG == id);
             var E_Ten = collection["Ten"];
             var E_SDT = Convert.ToInt32(collection["SDT"]);
             var E_TenDangNhap = collection["TenDangNhap"];
@@ -757,20 +760,20 @@ namespace DACN2.Controllers
             }
             else
             {
-                D_PT.Ten = E_Ten.ToString();
+                D_PT.TEN = E_Ten.ToString();
 
                 D_PT.SDT = E_SDT;
-                D_PT.TenDangNhap = E_TenDangNhap.ToString();
-                D_PT.Email = E_Email.ToString();
-                D_PT.MatKhau = E_MatKhau.ToString();
-                D_PT.DiaChi = E_DiaChi.ToString();
+                D_PT.TENDANGNHAP = E_TenDangNhap.ToString();
+                D_PT.EMAIL = E_Email.ToString();
+                D_PT.MATKHAU = E_MatKhau.ToString();
+                D_PT.DIACHI = E_DiaChi.ToString();
                 D_PT.CMND = E_CMND;
 
 
                 UpdateModel(D_PT);
 
 
-                data.SubmitChanges();
+                data.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -779,15 +782,15 @@ namespace DACN2.Controllers
 
         public ActionResult DeleteKhachHang(int id)
         {
-            var D_tour = data.KhachHangs.First(m => m.MaKhachHang == id);
+            var D_tour = data.KHACHHANGs.First(m => m.MAKHACHHANG == id);
             return View(D_tour);
         }
         [HttpPost]
         public ActionResult DeleteKhachHang(int id, FormCollection collection)
         {
-            var D_giay = data.KhachHangs.Where(m => m.MaKhachHang == id).First();
-            data.KhachHangs.DeleteOnSubmit(D_giay);
-            data.SubmitChanges();
+            var D_giay = data.KHACHHANGs.Where(m => m.MAKHACHHANG == id).First();
+            data.KHACHHANGs.Remove(D_giay);
+            data.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -971,18 +974,18 @@ namespace DACN2.Controllers
         /*-------------------------------*/
         public ActionResult CreateChang()
         {
-            Chang Chang = new Chang();          
-            Chang.Tours = data.Tours.ToList();
+            CHANG Chang = new CHANG();          
+            Chang.TOUR = data.TOURs.ToList();
             return View(Chang);
 
         }
         [HttpPost]
-        public ActionResult CreateChang(FormCollection collection, Chang s)
+        public ActionResult CreateChang(FormCollection collection, CHANG s)
         {
            
-            s.Tours = data.Tours.ToList();
+            s.TOUR = data.TOURs.ToList();
            
-            s.MaTour = int.Parse(Request.Form["ID"]);
+            s.MATOUR = int.Parse(Request.Form["ID"]);
 
             var E_Ten = collection["TenChang"];
             var E_Gia = Convert.ToInt32(collection["Gia"]);
@@ -993,11 +996,11 @@ namespace DACN2.Controllers
             }
             else
             {
-                s.TenChang = E_Ten.ToString();
+                s.TENCHANG = E_Ten.ToString();
               /*  s.GiaChang = E_Gia;*/                
-                s.NoiDungChang = E_NoiDung.ToString();
-                data.Changs.InsertOnSubmit(s);
-                data.SubmitChanges();
+                s.NOIDUNGCHANG = E_NoiDung.ToString();
+                data.CHANGs.AddOrUpdate(s);
+                data.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -1005,8 +1008,8 @@ namespace DACN2.Controllers
         }
         public ActionResult CreateNhanVien()
         {
-            NhanVien NhanVien = new NhanVien();
-            NhanVien.chucVus = data.ChucVus.ToList();
+            NHANVIEN NhanVien = new NHANVIEN();
+            NhanVien.CHUCVU = data.CHUCVUs.ToList();
             return View(NhanVien);
 
         }
@@ -1025,14 +1028,14 @@ namespace DACN2.Controllers
         {
 
 
-            var D_PT = data.Changs.First(m => m.MaChang == id);
+            var D_PT = data.CHANGs.First(m => m.MACHANG == id);
             var E_Ten = collection["TenChang"];
             /*var E_Gia = Convert.ToInt32(collection["Gia"]);*/
             var E_NoiDung = collection["NoiDungChang"];
 
           
 
-            D_PT.MaChang = id;
+            D_PT.MACHANG = id;
 
             if (string.IsNullOrEmpty(E_Ten))
             {
@@ -1040,9 +1043,9 @@ namespace DACN2.Controllers
             }
             else
             {
-                D_PT.TenChang = E_Ten.ToString();
+                D_PT.TENCHANG = E_Ten.ToString();
           
-                D_PT.NoiDungChang = E_NoiDung.ToString();
+                D_PT.NOIDUNGCHANG = E_NoiDung.ToString();
                /* D_PT.GiaChang = E_Gia;*/
             
 
@@ -1050,7 +1053,7 @@ namespace DACN2.Controllers
                 UpdateModel(D_PT);
 
 
-                data.SubmitChanges();
+                data.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -1060,15 +1063,15 @@ namespace DACN2.Controllers
         /*DELETE Chang*/
         public ActionResult DeleteChang(int id)
         {
-            var D_tour = data.Changs.First(m => m.MaChang == id);
+            var D_tour = data.CHANGs.First(m => m.MACHANG == id);
             return View(D_tour);
         }
         [HttpPost]
         public ActionResult DeleteChang(int id, FormCollection collection)
         {
-            var D_giay = data.Changs.Where(m => m.MaChang== id).First();
-            data.Changs.DeleteOnSubmit(D_giay);
-            data.SubmitChanges();
+            var D_giay = data.CHANGs.Where(m => m.MACHANG == id).First();
+            data.CHANGs.Remove(D_giay);
+            data.SaveChanges();
             return RedirectToAction("Index");
         }
 
