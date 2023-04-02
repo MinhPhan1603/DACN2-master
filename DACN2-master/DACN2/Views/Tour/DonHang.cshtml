@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DACN2.Models.ChiTietDatTour>
+﻿@model IEnumerable<DACN2.Models.HopDong>
 @using DACN2.Models
 @{
     ViewBag.Title = "DonHang";
@@ -15,12 +15,23 @@
 
         </th>
         <th>
+            Tên Tour
+
+        </th>
+        <th>
             Ngày Đặt
         </th>
         <th>
-            Giá
+            So Cho
         </th>
+        <th>
+            NgayKhoiHanh
 
+        </th>
+        <th>
+            NgayKetThuc
+
+        </th>
         <th>
             Tổng Tiền
         </th>
@@ -33,30 +44,32 @@
 
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DatTour.KhachHang.Ten)
+                @Html.DisplayFor(modelItem => item.KhachHang.Ten)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DatTour.NgayDat)
+                @Html.DisplayFor(modelItem => item.Tour.TenTour)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Gia)
-            </td>
-
-
-            <td>
-                @String.Format("{0:0,000}", item.Gia) VND
+                @Html.DisplayFor(modelItem => item.NgayDat)
             </td>
 
             <td>
+                @Html.DisplayFor(modelItem => item.SoCho)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
 
-                @Html.ActionLink("Chi tiết đơn hàng", "Chitietdonhang", new { id = item.MaDatTour }) |
-                @Html.ActionLink("Xác nhận đơn hàng", "DeleteDH", new { id = item.MaDatTour })
+            <td>
+                @String.Format("{0:0,000}", item.TongTien) VND
+            </td>
+
+            <td>
             </td>
         </tr>
     }
 
 </table>
-<tr>
-    <td colspan="5" class="text-right"><b>Doanh thu: @String.Format("{0:0,000}", @ViewBag.tongtien) VNĐ</b></td>
-
-</tr>

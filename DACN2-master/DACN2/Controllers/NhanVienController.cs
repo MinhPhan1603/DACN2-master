@@ -15,7 +15,7 @@ namespace DACN2.Controllers
         {
             return View();
         }
-        public ActionResult ListChang()
+       /* public ActionResult ListChang()
         {
 
             
@@ -62,9 +62,9 @@ namespace DACN2.Controllers
 
             return PartialView(sptl);
 
-        }
+        }*/
         
-        public ActionResult ListTour()
+      /*  public ActionResult ListTour()
         {
             
 
@@ -115,7 +115,7 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
-      
+      */
         public ActionResult Edit(int id)
         {
 
@@ -175,8 +175,8 @@ namespace DACN2.Controllers
             {
                 D_tour.TenTour = E_TenTour.ToString();
                 D_tour.Gia = E_Gia;
-                D_tour.NgayKhoiHanh = E_NgayKhoiHanh;
-                D_tour.NgayKetThuc = E_NgayKetThuc;
+               /* D_tour.NgayKhoiHanh = E_NgayKhoiHanh;
+                D_tour.NgayKetThuc = E_NgayKetThuc;*/
                 D_tour.SoCho = E_SoCho;
                 D_tour.NoiDung = E_NoiDung.ToString();
 
@@ -244,13 +244,13 @@ namespace DACN2.Controllers
          }*/
         /*-----------------------------*/
 
-        public ActionResult ListPhuongTien()
+  /*      public ActionResult ListPhuongTien()
         {
             var sptl = from ss in data.PhuongTiens select ss;
             return PartialView(sptl);
 
         }
-        /*CREATE PHUONG TIEN */
+        *//*CREATE PHUONG TIEN *//*
         public ActionResult CreatePhuongTien()
         {
 
@@ -288,7 +288,7 @@ namespace DACN2.Controllers
         }
 
 
-        /*EDIT PHUONG TIEN*/
+        *//*EDIT PHUONG TIEN*//*
         public ActionResult EditPhuongTien(int id)
         {
 
@@ -333,7 +333,7 @@ namespace DACN2.Controllers
             return this.EditPhuongTien(id);
         }
 
-        /*DELETE PHUONG TIEN*/
+        *//*DELETE PHUONG TIEN*//*
         public ActionResult DeletePhuongTien(int id)
         {
             var D_tour = data.PhuongTiens.First(m => m.MaPhuongTien == id);
@@ -351,7 +351,7 @@ namespace DACN2.Controllers
 
 
 
-        /*-----------------------------*/
+        *//*-----------------------------*//*
 
         public ActionResult ListDiaDiem()
         {
@@ -359,7 +359,7 @@ namespace DACN2.Controllers
             return PartialView(sptl);
 
         }
-        /*CREATE ĐIA DIEM */
+        *//*CREATE ĐIA DIEM *//*
         public ActionResult CreateDiaDiem()
         {
 
@@ -393,7 +393,7 @@ namespace DACN2.Controllers
             return this.CreateDiaDiem();
         }
 
-        /*EDIT DIA DIEM*/
+        *//*EDIT DIA DIEM*//*
         public ActionResult EditDiaDiem(int id)
         {
 
@@ -436,7 +436,7 @@ namespace DACN2.Controllers
             return this.EditDiaDiem(id);
         }
 
-        /*DELETE DIADIEM*/
+        *//*DELETE DIADIEM*//*
         public ActionResult DeleteDiaDiem(int id)
         {
             var D_tour = data.DiaDiems.First(m => m.MaDiaDiem == id);
@@ -453,7 +453,7 @@ namespace DACN2.Controllers
 
 
 
-        /*-----------------------------*/
+        *//*-----------------------------*//*
 
         public ActionResult ListAnUong()
         {
@@ -463,7 +463,7 @@ namespace DACN2.Controllers
         }
 
 
-        /*CREATE AnUong */
+        *//*CREATE AnUong *//*
         public ActionResult CreateAnUong()
         {
 
@@ -498,7 +498,7 @@ namespace DACN2.Controllers
             return this.CreateAnUong();
         }
 
-        /*EDIT An Uong*/
+        *//*EDIT An Uong*//*
         public ActionResult EditAnUong(int id)
         {
 
@@ -542,7 +542,7 @@ namespace DACN2.Controllers
             return this.EditAnUong(id);
         }
 
-        /*DELETE An Uong*/
+        *//*DELETE An Uong*//*
         public ActionResult DeleteAnUong(int id)
         {
             var D_tour = data.AnUongs.First(m => m.MaAnUong == id);
@@ -560,14 +560,14 @@ namespace DACN2.Controllers
 
 
 
-        /*-----------------------------*/
+        *//*-----------------------------*//*
         public ActionResult ListKhachSan()
         {
             var sptl = from ss in data.KSans select ss;
             return PartialView(sptl);
 
         }
-        /*CREATE KS */
+        *//*CREATE KS *//*
         public ActionResult CreateKS()
         {
 
@@ -606,7 +606,7 @@ namespace DACN2.Controllers
             return this.CreateKS();
         }
 
-        /*EDIT KS*/
+        *//*EDIT KS*//*
         public ActionResult EditKS(int id)
         {
 
@@ -653,7 +653,7 @@ namespace DACN2.Controllers
             return this.EditKS(id);
         }
 
-        /*DELETE KS*/
+        *//*DELETE KS*//*
         public ActionResult DeleteKS(int id)
         {
             var D_tour = data.KSans.First(m => m.MaKS == id);
@@ -669,7 +669,7 @@ namespace DACN2.Controllers
         }
 
 
-        /*-----------------------------*/
+        *//*-----------------------------*//*
         public ActionResult ListNguoiDiTour(int id)
         {
             var sptl = from ss in data.NguoiDiTours where ss.ChiTietDatTour.ID == id select ss;
@@ -681,7 +681,7 @@ namespace DACN2.Controllers
             var sptl = from ss in data.DatTours select ss;
             return PartialView(sptl);
 
-        }
+        }*/
         /*------------------------------------------------------------*/
         public ActionResult ListKhachHang()
         {
@@ -811,9 +811,9 @@ namespace DACN2.Controllers
 
 
          }*/
-        public ActionResult ListLichTrinh()
+  /*      public ActionResult ListLichTrinh()
         {
-            /*ViewBag.Tongtien = TongTien();*/
+            *//*ViewBag.Tongtien = TongTien();*//*
             var sptl = from ss in data.LichTrinhs select ss;
             List<LichTrinh> lichTrinhs = data.LichTrinhs.Where(s =>  s.GiaLichTrinh != null).ToList();
             if (lichTrinhs.Count > 0)
@@ -903,7 +903,7 @@ namespace DACN2.Controllers
 
             return this.CreateLichTrinh();
         }
-        /*EDIT lcihtrinh*/
+        *//*EDIT lcihtrinh*//*
         public ActionResult EditLichTrinh(int id)
         {
 
@@ -948,7 +948,7 @@ namespace DACN2.Controllers
             return this.EditLichTrinh(id);
         }
 
-        /*DELETE Chang*/
+        *//*DELETE Chang*//*
         public ActionResult DeleteLichTrinh(int id)
         {
             var D_tour = data.LichTrinhs.First(m => m.MaLichTrinh == id);
@@ -965,7 +965,7 @@ namespace DACN2.Controllers
 
 
 
-
+*/
 
 
         /*-------------------------------*/
@@ -994,7 +994,7 @@ namespace DACN2.Controllers
             else
             {
                 s.TenChang = E_Ten.ToString();
-                s.GiaChang = E_Gia;                
+              /*  s.GiaChang = E_Gia;*/                
                 s.NoiDungChang = E_NoiDung.ToString();
                 data.Changs.InsertOnSubmit(s);
                 data.SubmitChanges();
@@ -1027,7 +1027,7 @@ namespace DACN2.Controllers
 
             var D_PT = data.Changs.First(m => m.MaChang == id);
             var E_Ten = collection["TenChang"];
-            var E_Gia = Convert.ToInt32(collection["Gia"]);
+            /*var E_Gia = Convert.ToInt32(collection["Gia"]);*/
             var E_NoiDung = collection["NoiDungChang"];
 
           
@@ -1043,7 +1043,7 @@ namespace DACN2.Controllers
                 D_PT.TenChang = E_Ten.ToString();
           
                 D_PT.NoiDungChang = E_NoiDung.ToString();
-                D_PT.GiaChang = E_Gia;
+               /* D_PT.GiaChang = E_Gia;*/
             
 
 
@@ -1176,11 +1176,11 @@ namespace DACN2.Controllers
 
         }
         /*--------------------*/
-        public ActionResult Chitietdonhang(int id)
+       /* public ActionResult Chitietdonhang(int id)
         {
             var D_tour = data.DatTours.FirstOrDefault(m => m.MaDatTour == id);
             return View(D_tour);
-        }
+        }*/
         public ActionResult DangNhap()
         {
             return View();

@@ -48,15 +48,16 @@ namespace DACN2.Models
 
             iSoluongNguoiLon = 1;
             iSoluongTreEm = 0;
-            List<NguoiDiTour> nguoiDiTours = data.NguoiDiTours.Where(s => s.ID == id).ToList();
-            if (nguoiDiTours != null)
-            {
-                iSoChoCon = (int)tour.SoCho - nguoiDiTours.Count;
-            }
-            else
-            {
-                iSoChoCon = (int)tour.SoCho;
-            }
+            iSoChoCon = Convert.ToInt32(tour.SoCho);
+            /* List<NguoiDiTour> nguoiDiTours = data.NguoiDiTours.Where(s => s.ID == id).ToList();
+             if (nguoiDiTours != null)
+             {
+                 iSoChoCon = (int)tour.SoCho - nguoiDiTours.Count;
+             }
+             else
+             {
+                 iSoChoCon = (int)tour.SoCho;
+             }*/
         }
 
     }
