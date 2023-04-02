@@ -16,12 +16,6 @@
             @Html.DisplayNameFor(model => model.Gia)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NgayKhoiHanh)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayKetThuc)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.SoCho)
         </th>
 
@@ -61,12 +55,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.Gia)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NgayKhoiHanh)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.NgayKetThuc)
-    </td>
+
     <td>
         @Html.DisplayFor(modelItem => item.SoCho)
     </td>
@@ -96,9 +85,9 @@
         @Html.DisplayFor(modelItem => item.LoiNhuan)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Thông tin người đi tour", "ListNguoiDiTour", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        @Html.ActionLink("Edit", "Edit", new { id = item.MaTour }) |
+        @Html.ActionLink("Thông tin người đi tour", "ListNguoiDiTour", new { id = item.MaTour }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.MaTour })
     </td>
 </tr>
     }

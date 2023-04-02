@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DACN2.Models.GioHang>
 @{ ViewBag.Title = "Giohang";
-                Layout = "~/Views/Shared/_Layout.cshtml";
-                int index = 0; }
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 0; }
 <script>
     function ndt(index) {
         var c = 'c' + index;
@@ -14,8 +14,8 @@
         var l = document.getElementById(a);
         var b = 'h' + index;
         var d = document.getElementById(b);
-        l.href = d.value +  total;
-     }
+        l.href = d.value + total;
+    }
 </script>
 <h2>Giỏ Hàng</h2>
 <p>
@@ -57,46 +57,48 @@
         @foreach (var item in Model)
         {
 
-<tr>
-    <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
-    <td> <img src="@item.Hinh" width="180" /></td>
-    @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
-    {
-<td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.TenTour)</td>
+                <td> <img src="@item.Hinh" width="180" /></td>
+                @using (Html.BeginForm("CapnhatGiohang", "GioHang", new { @id = item.ID }))
+                {
+                    <td>@String.Format("{0:0,0}", item.GiaNguoiLon) VNĐ </td>
                     <td>@String.Format("{0:0,0}", item.GiaTreEm) VNĐ </td>
 
-          <td>
+                    <td>
 
 
-                                            @*<input type="number"  pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />*@
-                                            <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max=""
-                                                   name="txtSolg1" value="@item.iSoChoCon" style="width:40px; border:none" disabled />
-                                            
+                        @*<input type="number"  pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="@item.max" name="txtSolg1" value="@item.iSoluongNguoiLon" style="width:40px; border:none" />*@
+                        <input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="1" max="100"
+                               name="txtSolg1" value="@item.iSoChoCon" style="width:40px; border:none" disabled />
 
 
 
 
-                                        </td>
 
-         <td>
-    @*<input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />*@
-          <input type="number" id="n@(item.ID)" onchange="ndt('@(item.ID)')" pattern=" 0+\.[0-9]*[1-9][0-9]*$"
-           min="1" max="@item.maxte" name="txtSolg2" value="0" style="width:40px; border:none" />
+                    </td>
 
-           </td>
-           <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
-           <td>
-                                                                                                        <a href="@Url.Action("Detail", "Giay", new { id = item.ID })">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
-                                                                                                    </td>
-           <td>
-                                                                                                                            <input type="hidden" id="h@(item.ID)" value="/GioHang/DangKy/@(item.ID)?number=" />
-                                                                                                                            <a href="#" id="a@(item.ID)">Nhap Nguoi Di</a>
-                                                                                                                            <input type="hidden" id="c@(item.ID)" value="0" />
-                                                                                                                        </td>
-                                                                                                                                            <td>
-                                                                                                                                                <input type="submit" value="Cập Nhật" class="btn btn-success" />
-                                                                                                                                            </td>                }
-</tr>}
+                    <td>
+                        @*<input type="number" pattern=" 0+\.[0-9]*[1-9][0-9]*$" min="0" max="@item.maxte" name="txtSolg2" value="@item.iSoluongTreEm" style="width:40px; border:none" />*@
+                        <input type="number" id="n@(item.ID)" onchange="ndt('@(item.ID)')" pattern=" 0+\.[0-9]*[1-9][0-9]*$"
+                               min="1" max="@item.iSoChoCon" name="txtSolg2" value="0" style="width:40px; border:none" />
+
+                    </td>
+                    <td> @Html.DisplayFor(modelItem => item.dThanhtien)</td>
+                    <td>
+                        <a href="@Url.Action("Detail", "Giay", new { id = item.ID })">Chi tiết</a> | @Html.ActionLink("Xóa", "XoaGiohang", new { @id = item.ID })
+                    </td>
+                    <td>
+                        <input type="hidden" id="h@(item.ID)" value="/GioHang/DangKy/@(item.ID)?number=" />
+                        <a href="#" id="a@(item.ID)">Nhap Nguoi Di</a>
+                        <input type="hidden" id="c@(item.ID)" value="0" />
+                    </td>
+                    <td>
+                        <input type="submit" value="Cập Nhật" class="btn btn-success" />
+                    </td>
+                }
+            </tr>
+        }
 
 
 
@@ -109,7 +111,7 @@
 
     <div class="traveler card" style="width:100%; margin: 30px 20px; height:100%;">
 
-       @* <em>@Html.ActionLink("Nhập người đi", "DangKy", "GioHang")</em>*@
+        @* <em>@Html.ActionLink("Nhập người đi", "DangKy", "GioHang")</em>*@
 
         @*
             @using DACN2.Models
@@ -224,26 +226,26 @@
 
                 @if (ViewBag.TongTien <= 300000)
                 {
-    <p colspan="4">Tổng tiền:</p>
-                    <p> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p> }
-                                else
-                                {
-                                    if (ViewBag.TongTien > 2000000 && ViewBag.TongTien <= 10000000)
-                                    {
                     <p colspan="4">Tổng tiền:</p>
-                                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
-                                                            <p colspan="4">Giam Gia:</p>
-                                                                                <p> @String.Format("{0:0,0}", ViewBag.TienGiam1) vnd </p>
-                                                                                                    <p>Giam &#8595;30%</p> }
-                                                                                                                    else
-                                                                                                                    {
-                                                                                                    <p colspan="4">Tổng tiền:</p>
-                                                                                                                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
-                                                                                                                                            <p colspan="4">Giảm giá:</p>
-                                                                                                                                                                <p> @String.Format("{0:0,0}", ViewBag.TienGiam2) vnd </p>
-                                                                                                                                                                                    <p>Giảm &#8595;50%</p>}
+                    <p> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p> }
+                else
+                {
+                    if (ViewBag.TongTien > 2000000 && ViewBag.TongTien <= 10000000)
+                    {
+                        <p colspan="4">Tổng tiền:</p>
+                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                        <p colspan="4">Giam Gia:</p>
+                        <p> @String.Format("{0:0,0}", ViewBag.TienGiam1) vnd </p>
+                        <p>Giam &#8595;30%</p> }
+                    else
+                    {
+                        <p colspan="4">Tổng tiền:</p>
+                        <p style=" text-decoration-line:line-through"> @String.Format("{0:0,0}", ViewBag.Tongtien) vnd</p>
+                        <p colspan="4">Giảm giá:</p>
+                        <p> @String.Format("{0:0,0}", ViewBag.TienGiam2) vnd </p>
+                        <p>Giảm &#8595;50%</p>}
 
-                                                                                                                                                                                                }
+                }
 
 
             </div>
@@ -261,7 +263,7 @@
         <div style="font-weight: bold; text-align: right; color:yellow">
             <div colspan="5" style="margin:20px;">
                 @*@Html.ActionLink("Đặt Hàng", "Dathang", "GioHang")*@
-                <a class="btn btn-info" href="@Url.Action("DatHang", "GioHang")" style="width:100%;"> Đặt hàng</a>
+                <a class="btn btn-info" @*href="@Url.Action("DatHang", "GioHang")"*@ style="width:100%;" data-toggle="modal" data-target="#exampleModalCenter"> Đặt hàng</a>
             </div>
 
         </div>
@@ -288,6 +290,27 @@
     </div>
 </div>
 
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">Đăng ký tài khoản khách hàng</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Action("DangKy", "GioHang")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <hr class="colorgraph" />

@@ -7,14 +7,16 @@ using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 using DACN2.Controllers;
-
+using DACN2.Context;
+using System.Data.Entity.Migrations;
 
 namespace DACN2.Controllers
 {
     public class KhachHangController : Controller
     {
         // GET: NguoiDung
-        MyDataDataContext data = new MyDataDataContext();
+        ORACLEModels data = new ORACLEModels();
+       // MyDataDataContext data = new MyDataDataContext();
         [HttpGet]
         public ActionResult DangKy()
         {
@@ -22,13 +24,13 @@ namespace DACN2.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult DangKy(FormCollection collection, KhachHang kh)
+        public ActionResult DangKy(FormCollection collection, KHACHHANG kh)
         {
             
             var hoten = collection["Ten"];
             var tendangnhap = collection["TenDangNhap"];
             var matkhau = collection["MatKhau"];
-            var MatkhauXacNhan = collection["MatKhauXacNhan"];
+            
             var email = collection["Email"];
             var diachi = collection["DiaChi"];
             var dienthoai = collection["STD"];
@@ -57,24 +59,24 @@ namespace DACN2.Controllers
             else
             {
             }*/
-                if (!matkhau.Equals(MatkhauXacNhan))
+                if (matkhau == "")
                 {
                     ViewData["MatkhauGiongNhau"] = "Mật khẩu và mật khẩu xác nhận phải giống nhau";
                 }
                 else
                 {
                    
-                    kh.Ten = hoten;
-                    kh.TenDangNhap = tendangnhap;
-                    kh.MatKhau = matkhau;
-                    kh.Email = email;
-                    kh.DiaChi = diachi;
+                    kh.TEN = hoten;
+                    kh.TENDANGNHAP = tendangnhap;
+                    kh.MATKHAU = matkhau;
+                    kh.EMAIL = email;
+                    kh.DIACHI = diachi;
                     kh.CMND = Convert.ToInt32(CMND);
                     kh.SDT = Convert.ToInt32(dienthoai);
                     
                     
-                    data.KhachHangs.InsertOnSubmit(kh);
-                    data.SubmitChanges();
+                    data.KHACHHANGs.AddOrUpdate(kh);
+                    data.SaveChanges();
                     return RedirectToAction("DangNhap");
                 }
             return this.DangKy();
@@ -90,7 +92,7 @@ namespace DACN2.Controllers
         {
             var TenDangNhap = collection["TenDangNhap"];
             var MatKhau = collection["MatKhau"];
-            KhachHang kh = data.KhachHangs.SingleOrDefault(n => n.TenDangNhap == TenDangNhap && n.MatKhau == MatKhau);
+            KHACHHANG kh = data.KHACHHANGs.SingleOrDefault(n => n.TENDANGNHAP == TenDangNhap && n.MATKHAU == MatKhau);
             if (kh != null )
             {
                 ViewBag.ThongBao = "Chúc mừng đăng nhập thành công";
@@ -293,7 +295,7 @@ namespace DACN2.Controllers
         public JsonResult CheckUsername(string userdata)
         {
             System.Threading.Thread.Sleep(200);
-            var SearchData = data.KhachHangs.Where(x => x.TenDangNhap == userdata).SingleOrDefault();
+            var SearchData = data.KHACHHANGs.Where(x => x.TENDANGNHAP == userdata).SingleOrDefault();
 
             if (SearchData != null)
             {
@@ -308,7 +310,7 @@ namespace DACN2.Controllers
         public JsonResult CheckEmail(string userdata)
         {
             System.Threading.Thread.Sleep(200);
-            var SearchData = data.KhachHangs.Where(x => x.Email == userdata).SingleOrDefault();
+            var SearchData = data.KHACHHANGs.Where(x => x.EMAIL == userdata).SingleOrDefault();
 
             if (SearchData != null)
             {
@@ -323,7 +325,7 @@ namespace DACN2.Controllers
         public JsonResult CheckPhone(string userdata)
         {
             System.Threading.Thread.Sleep(200);
-            var SearchData = data.KhachHangs.Where(x => x.SDT.ToString() == userdata).SingleOrDefault();
+            var SearchData = data.KHACHHANGs.Where(x => x.SDT.ToString() == userdata).SingleOrDefault();
 
             if (SearchData != null)
             {

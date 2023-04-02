@@ -124,10 +124,10 @@
                                                             <a class="btn btn-success"
                                                                href="@Url.Action("ThemGioHang", "GioHang", new
                                                      {
-                                                              @id = item.ID,
+                                                              @id = item.MaTour,
                                                                 @strURL = Request.Url.ToString()
                                                         })">Thêm vào giỏ</a>
-                                                            <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+                                                            <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.MaTour})">Thong Tin</a>
 
                                                         }
                                                         else
@@ -135,7 +135,7 @@
                                                             <a class="btn  btn-warning ">
                                                                 Tạm Hết Hàng
                                                             </a>
-                                                            <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.ID})">Thong Tin</a>
+                                                            <a class="btn btn-default" href="@Url.Action("Detail", "Tour",new { @id = item.MaTour})">Thong Tin</a>
 
 
                                                         }

@@ -39,7 +39,7 @@ namespace DACN2.Models
         {
 
             ID = id;
-            Tour tour = data.Tours.Single(n => n.ID == ID);
+            Tourorcl tour = data.Tours.Single(n => n.MaTour == ID);
             TenTour = tour.TenTour;
             max = (int)tour.SoCho;
             Hinh = tour.Hinh;

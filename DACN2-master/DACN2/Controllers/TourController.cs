@@ -23,7 +23,7 @@ namespace DACN2.Controllers
         public ActionResult Detail(int id)
         {
             Tour Tour = new Tour();
-            var D_tour = data.Tours.FirstOrDefault(m => m.ID == id);
+            var D_tour = data.Tours.FirstOrDefault(m => m.MaTour == id);
             /*Tour.Chang = data.Changs.ToList(); */
             
             return View(D_tour);
@@ -31,7 +31,7 @@ namespace DACN2.Controllers
 
         public ActionResult Listchang(int id)
         {
-            var sptl = from ss in data.Changs where ss.ID == id select ss;
+            var sptl = from ss in data.Changs where ss.MaTour == id select ss;
             return PartialView(sptl);
 
         }
@@ -127,7 +127,7 @@ namespace DACN2.Controllers
         {
 
            
-            var D_tour = data.Tours.FirstOrDefault(m => m.ID == id);
+            var D_tour = data.Tours.FirstOrDefault(m => m.MaTour == id);
             
             /*D_tour.LoaiTours = data.LoaiTours.ToList();
             D_tour.LoaiKsan = data.KSans.ToList();
@@ -142,7 +142,7 @@ namespace DACN2.Controllers
         {
             
             /*s.LoaiTours = data.LoaiTours.ToList();*/
-            var D_tour = data.Tours.First(m => m.ID == id);
+            var D_tour = data.Tours.First(m => m.MaTour == id);
 /*            D_tour.LoaiTours = data.LoaiTours.ToList();
             D_tour.LoaiKsan = data.KSans.ToList();
             D_tour.HuongDanViens = data.HuongDanViens.ToList();
@@ -172,7 +172,7 @@ namespace DACN2.Controllers
             var E_Hinh2 = collection["Hinh2"];
             var E_Hinh3 = collection["Hinh3"];
 /*            var E_Hinh4 = collection["Hinh4"];*/
-            D_tour.ID = id;
+            D_tour.MaTour = id;
 
             if (string.IsNullOrEmpty(E_TenTour))
             {
@@ -215,13 +215,13 @@ namespace DACN2.Controllers
         }
         public ActionResult Delete(int id)
         {
-            var D_tour = data.Tours.First(m => m.ID == id);
+            var D_tour = data.Tours.First(m => m.MaTour == id);
             return View(D_tour);
         }
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
-            var D_giay = data.Tours.Where(m => m.ID == id).First();
+            var D_giay = data.Tours.Where(m => m.MaTour == id).First();
             data.Tours.DeleteOnSubmit(D_giay);
             data.SubmitChanges();
             return RedirectToAction("ListGiay");

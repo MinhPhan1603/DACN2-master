@@ -1,5 +1,5 @@
 ﻿
-namespace DACN2.Models
+namespace DACN2.Context
 {
     using System;
     using System.Collections.Generic;
@@ -7,12 +7,12 @@ namespace DACN2.Models
     using System.Linq;
     using System.Web;
 
-    public partial class Chang
+    public partial class Changorcl
     {
 
 
        
-        public List<Tourorcl> Tours = new List<Tourorcl>();
+        public List<TOUR> TOURs = new List<TOUR>();
 
 
 
